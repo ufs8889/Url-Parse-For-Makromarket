@@ -7,7 +7,7 @@ get_data = lambda url: BeautifulSoup(((requests.get(url)).text),"html.parser")
 product_url = "https://makromarket.uz/categories/sveci"
 soup = get_data(product_url)   
 
-get_product_urls = ["https://makromarket.uz/categories/sveci","https://makromarket.uz/categories/kartofel","https://makromarket.uz/categories/konservaciya-specii-i-dobavki","https://makromarket.uz/categories/zamorozennaya-gotovaya-produkciya"]
+get_product_urls = [link.get('href') for link in soup.find_all('a') if link.get('href').startswith("https://makromarket.uz/categories")]
 
 with_pagination = []
 without_pagination = []
